@@ -15,15 +15,14 @@ Drupal.settings.debug = true;
 /* Drupal Paths */
  
 // Site Path (do not use a trailing slash)
-Drupal.settings.site_path = 'http://mooyai.com'; // e.g. http://www.example.com
+Drupal.settings.site_path = 'http://dev.myally.biz';  // e.g. http://www.example.com
 
 // Default Services Endpoint Path
 Drupal.settings.endpoint = 'drupalgap';
 
 // Files Directory Paths (use one or the other)
-Drupal.settings.file_public_path = 'sites/default/files';
+Drupal.settings.file_public_path = 'sites/mooyai.com/files';
 //Drupal.settings.file_private_path = 'system/files';
-
 
 // The Default Language Code
 Drupal.settings.language_default = 'th';
@@ -105,6 +104,11 @@ drupalgap.settings.loader = {
 /** Custom Modules - www/app/modules/custom **/
 
 Drupal.modules.custom['my_module'] = {};
+/*Drupal.modules.contrib['facebook'] = {};
+drupalgap.settings.facebook = {
+  app_id: '137950733040547',
+  scope: 'email'
+}; */
 
 /***************************************|
  * Menus - http://drupalgap.org/node/85 |

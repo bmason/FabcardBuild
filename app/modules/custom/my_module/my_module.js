@@ -22,7 +22,7 @@ function my_module_menu() {
   };
   
     items['coupons'] = {
-    title: t('Coupons'),
+    title: t('Promotions'),
     page_callback: 'my_module_coupons_page'
   };
   
@@ -60,7 +60,7 @@ function set_language_th() {
 
 function my_module_memberCard_page() {
 $.ajax({
-      url: "http://www.mooyai.com/fcgetprofile/" + Drupal.user.name,
+      url: Drupal.settings.site_path + '/fcgetprofile',
       type: 'post',
       dataType: 'json',
       error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -71,15 +71,20 @@ $.ajax({
 	   
 	var theDiv = document.getElementById("memberCard");
 	var elm = document.createElement("img");
-	elm.src = drupalgap_image_path(node.field_image.und[0].uri);
+//	elm.src = drupalgap_image_path(node.field_image.und[0].uri);
+//	theDiv.appendChild(elm);
+//	elm = document.createElement("br");
+//	theDiv.appendChild(elm);	
+	elm = document.createTextNode(t('Member Number') + ': ' + node.memberid);
 	theDiv.appendChild(elm);
-	elm = document.createElement("br");
-	theDiv.appendChild(elm);	
-	elm = document.createTextNode(t('Member No') + ': ' + node.field_number.und[0].value);
+	theDiv.appendChild(document.createElement("br"));
+	elm = document.createTextNode(t('First Name') + ': ' + node.firstname);
 	theDiv.appendChild(elm);
-	elm = document.createElement("br");
-	theDiv.appendChild(elm);	
-	var d = node.field_expiration.und[0].value.split(' ')[0].split('-');
+	theDiv.appendChild(document.createElement("br"));
+	elm = document.createTextNode(t('Last Name') + ': ' + node.lastname);
+	theDiv.appendChild(elm);
+	theDiv.appendChild(document.createElement("br"));	
+	var d = node.expiration.split(' ')[0].split('-');
 	elm = document.createTextNode(t('Expy Date') + ': ' + d[2]+'/'+d[1]+'/'+d[0]);
 	theDiv.appendChild(elm);
 	   
@@ -104,7 +109,7 @@ function my_module_coupons_page() {
     content['my_coupons_list'] = {
       theme: 'view',
       format: 'ul',
-      path: '/coupons', /* the path to the view in Drupal */
+      path: '/promotions-for-mobile', /* the path to the view in Drupal */
       row_callback: 'my_module_coupons_list_row',
       empty_callback: 'my_module_coupons_list_empty',
       attributes: {
@@ -121,7 +126,7 @@ function my_module_coupons_page() {
  */
 function my_module_coupons_list_row(view, row) {
   try {
-    return l(row.title + '<br>' + row.body, 'node/' + row.nid); 
+    return l(row.title + '<br>' + '<img src="' + row.field_promotion_image.src + '"><br>' + row.body , Drupal.settings.site_path + '/node/' + row.nid, { InAppBrowser: true }); 
   }
   catch (error) { console.log('my_module_coupons_list_row - ' + error); }
 }
@@ -131,11 +136,23 @@ function my_module_coupons_list_row(view, row) {
  */
 function my_module_coupons_list_empty(view) {
   try {
-    return 'Sorry, no coupons were found.';
+    return 'Sorry, no promotions were found.';
   }
   catch (error) { console.log('my_module_coupons_list_empty - ' + error); }
 }
 
+/**
+ * Implements hook_form_alter().
+ */
+function my_module_form_alter(form, form_state, form_id) {
+  try {
+    if (form_id == 'user_login_form') { 
+     delete form.buttons['create_new_account'];
+    }
+
+  }
+  catch (error) { console.log('my_module_form_alter - ' + error); }
+}
 
 /**
 * The callback for the "Hello World" page.
@@ -151,7 +168,7 @@ function my_module_hello_world_page() {
     theme: 'button',
     text: t('Register with Fab Card'),
     attributes: {
-      onclick: "drupalgap_alert(t('Fab Card registration web page'))"
+      onclick: "drupalgap_alert(t('Fab Card registration web page www.fabcard.co.th'))"
     }
   }}
   else {
@@ -164,7 +181,7 @@ function my_module_hello_world_page() {
 	  
   content['my_button_link'] = {
   theme: 'button_link',
-  text: t('View Coupons'),
+  text: t('Promotions'),
   path: 'coupons' 
   }
 

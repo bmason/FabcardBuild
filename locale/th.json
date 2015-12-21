@@ -14,5 +14,12 @@
    "OK" : "ตกลง",
    "Exit Fab Card?" : "ประตูออก Fab Card?",
    "About" : "เกี่ยวกับ",
-   "Copyright" : "ลิขสิทธิ์"
+   "Copyright" : "ลิขสิทธิ์",
+   "Continue with Facebook" : "",
+   "First Name" : "ชื่อ",
+   "Last Name" : "นามสกุล",
+   "Alert" : "thai Alert",
+   "Expy Date"  : "วันหมดอายุ",
+   "Promotions" : "โปรโมชั่น",
+   "Wrong name or passoword" : "thai Wrong name or passowrd"
 }
