@@ -70,24 +70,30 @@ $.ajax({
 //       alert("Loaded " + node.title);
 	   
 	var theDiv = document.getElementById("memberCard");
+	theDiv.setAttribute('style', 'height: 400px; position: relative; ' + ($(window).width() < 400 ? 'left: -130px; transform: rotate(90deg);' : '')+' width: 400px'); //transform: rotate(90deg);
 	var elm = document.createElement("img");
-//	elm.src = drupalgap_image_path(node.field_image.und[0].uri);
-//	theDiv.appendChild(elm);
-//	elm = document.createElement("br");
-//	theDiv.appendChild(elm);	
-	elm = document.createTextNode(t('Member Number') + ': ' + node.memberid);
+	elm.src = 'images/membercard2.jpg';
 	theDiv.appendChild(elm);
-	theDiv.appendChild(document.createElement("br"));
-	elm = document.createTextNode(t('First Name') + ': ' + node.firstname);
-	theDiv.appendChild(elm);
-	theDiv.appendChild(document.createElement("br"));
+	el_span = document.createElement('span');
+	elm = document.createTextNode( node.memberid);
+	el_span.setAttribute('style', 'position: absolute;top: 150px; left: 210px;'); 
+	theDiv.appendChild(el_span);
+	el_span.appendChild(elm);
+//	theDiv.appendChild(document.createElement("br"));
+	el_span = document.createElement('span');
+	elm = document.createTextNode( node.firstname + ' ' + node.lastname);
+	el_span.setAttribute('style', 'position: absolute;top: 98px; left: 210px;'); 
+	theDiv.appendChild(el_span);
+	el_span.appendChild(elm);
+
+/* 	theDiv.appendChild(document.createElement("br"));
 	elm = document.createTextNode(t('Last Name') + ': ' + node.lastname);
-	theDiv.appendChild(elm);
-	theDiv.appendChild(document.createElement("br"));	
+	theDiv.appendChild(elm); */
+/* 	theDiv.appendChild(document.createElement("br"));	
 	var d = node.expiration.split(' ')[0].split('-');
 	elm = document.createTextNode(t('Expy Date') + ': ' + d[2]+'/'+d[1]+'/'+d[0]);
 	theDiv.appendChild(elm);
-	   
+ */	   
       }
   });
   
