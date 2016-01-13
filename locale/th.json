@@ -11,6 +11,7 @@
    "Request new password" : "ขอรหัสผ่านใหม่",
    "Confirm" : "ยืนยัน",
    "CANCEL" : "ยกเลิก",
+   "Logging out..." : "ออกจากระบบ",
    "OK" : "ตกลง",
    "Exit Fab Card?" : "ประตูออก Fab Card?",
    "About" : "เกี่ยวกับ",
@@ -18,7 +19,7 @@
    "Continue with Facebook" : "",
    "First Name" : "ชื่อ",
    "Last Name" : "นามสกุล",
-   "Alert" : "thai Alert",
+   "Alert" : "การแจ้งเตือน",
    "Expy Date"  : "วันหมดอายุ",
    "Promotions" : "โปรโมชั่น",
    "Wrong name or passoword" : "thai Wrong name or passowrd"

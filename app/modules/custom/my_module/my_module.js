@@ -115,7 +115,7 @@ $.ajax({
 }
 
 function my_module_about_page() {
-     return 'Fabcard Mobile 0.2.0<br><br>Copyright &#169; Fabcard 6';	
+     return 'Fabcard Mobile 0.3.0<br><br>Copyright &#169; Fabcard 2016';	
 }	
 	
 
