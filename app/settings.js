@@ -21,7 +21,7 @@ Drupal.settings.site_path = 'http://dev.myally.biz';  // e.g. http://www.example
 Drupal.settings.endpoint = 'drupalgap';
 
 // Files Directory Paths (use one or the other)
-Drupal.settings.file_public_path = 'sites/mooyai.com/files';
+Drupal.settings.file_public_path = 'sites/default/files';
 //Drupal.settings.file_private_path = 'system/files';
 
 // The Default Language Code
@@ -224,16 +224,7 @@ drupalgap.settings.menus.regions['header'] = {
     } ,
 	
 
-	
-    {  title: 'English',
-	    path: 'set_language/und',
-      options: {
 
-        attributes: {
-          'class': 'ui-btn-right'
-        }
-      }
-    },	
 	
 	
     /* Home Button */

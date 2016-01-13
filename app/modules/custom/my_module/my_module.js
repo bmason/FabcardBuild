@@ -21,8 +21,17 @@ function my_module_menu() {
     page_callback: 'my_module_hello_world_page'
   };
   
+    items['hello_worlden'] = {
+    title: 'Fab Card',
+    page_callback: 'my_module_hello_world_page'
+  };
+  
     items['coupons'] = {
     title: t('Promotions'),
+    page_callback: 'my_module_coupons_page'
+  };
+     items['couponsen'] = {
+    title: 'Promotions',
     page_callback: 'my_module_coupons_page'
   };
   
@@ -31,6 +40,11 @@ function my_module_menu() {
     page_callback: 'my_module_about_page'
   };
   
+  
+  items['memberCarden'] = {
+    title: 'Member Card',
+    page_callback: 'my_module_memberCard_page'
+  };
   
   items['memberCard'] = {
     title: t('Member Card'),
@@ -101,7 +115,7 @@ $.ajax({
 }
 
 function my_module_about_page() {
-     return 'Fabcard  0.0.3<br><br>Copyright &#169; Fabcard 2015';	
+     return 'Fabcard Mobile 0.2.0<br><br>Copyright &#169; Fabcard 6';	
 }	
 	
 
@@ -165,41 +179,42 @@ function my_module_form_alter(form, form_state, form_id) {
 */
 function my_module_hello_world_page() {
   var content = {};
-  if (Drupal.user.uid == 0) {content['my_button'] = {
+  if (Drupal.user.uid == 0) {
+	content['my_button'] = {
     theme: 'button_link',
     text: t('Login'),
     path: 'user/login'
   };
   content['register'] = {
-    theme: 'button',
+    theme: 'button_link',
     text: t('Register with Fab Card'),
-    attributes: {
-      onclick: "drupalgap_alert(t('Fab Card registration web page www.fabcard.co.th'))"
-    }
+    path: 'http:\\www.fabcardasia.co.th',
+	options: {
+    InAppBrowser:true
+  }
   }}
   else {
 	  
   content['memberCard'] = {
   theme: 'button_link',
   text: t('Member Card'),
-  path: 'memberCard' 
+  path: (Drupal.settings.language_default =='und') ? 'memberCarden' : 'memberCard' 
   }	  
 	  
   content['my_button_link'] = {
   theme: 'button_link',
   text: t('Promotions'),
-  path: 'coupons' 
+  path: (Drupal.settings.language_default =='und') ? 'couponsen' : 'coupons' 
   }
 
   
   };
-  
-	if (Drupal.settings.language_default!='und') {
-	  drupalgap.settings.menus.regions['header'].links[1].title = 'English';
-	  drupalgap.settings.menus.regions['header'].links[1].path = 'set_language/und';
-	} else  {
-	  drupalgap.settings.menus.regions['header'].links[1].title = 'ภาษาไทย';
-	  drupalgap.settings.menus.regions['header'].links[1].path = 'set_language/th';
-	};
+  content['toggle_language'] = {
+  theme: 'button',
+  text: (Drupal.settings.language_default!='und') ? 'English' : 'ภาษาไทย',
+  attributes: {
+    onclick: "Drupal.settings.language_default = (Drupal.settings.language_default =='und') ? 'th' : 'und'; drupalgap_goto((Drupal.settings.language_default =='und') ? 'hello_worlden' : 'hello_world', {reloadPage:true});"
+  }
+}; 
   return content;
 }
