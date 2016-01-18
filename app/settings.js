@@ -145,7 +145,18 @@ drupalgap.settings.menus['user_menu_authenticated'] = {
           'data-icon': 'delete'
         }
       }
+    },{
+      title: t('Exit'),
+      path: 'exit',
+      options: {
+        attributes: {
+          'data-icon': 'delete'
+        }
+      }
     }
+	
+	
+	
   ]
 };
 
@@ -154,7 +165,7 @@ drupalgap.settings.menus['main_menu'] = {
   options: menu_popup_get_default_options(),
   links: [
     {
-      title:t('About'),
+      title:t('About Fab Card App.'),
       path:'about',
       options:{
         attributes:{

@@ -21,6 +21,12 @@ function my_module_menu() {
     page_callback: 'my_module_hello_world_page'
   };
   
+    
+    items['exit'] = {
+    title: 'exit',
+    page_callback: 'my_module_exit_app'
+  };
+  
     items['hello_worlden'] = {
     title: 'Fab Card',
     page_callback: 'my_module_hello_world_page'
@@ -43,7 +49,7 @@ function my_module_menu() {
   
   items['memberCarden'] = {
     title: 'Member Card',
-    page_callback: 'my_module_memberCard_page'
+    page_callback: 'my_module_memberCard_pageen'
   };
   
   items['memberCard'] = {
@@ -62,17 +68,15 @@ function my_module_menu() {
   return items;
 }
 
-function set_language_und() {
-	Drupal.settings.language_default='und'; 
-	return my_module_hello_world_page();
+function my_module_memberCard_pageen() {
+	return my_module_memberCard_page();
 }
 
-function set_language_th() {
-	Drupal.settings.language_default='th'; 
-	return my_module_hello_world_page();
+function my_module_exit_app() {
+	navigator.app.exitApp()
 }
 
-function my_module_memberCard_page() {
+function my_module_memberCard_page() {  
 $.ajax({
       url: Drupal.settings.site_path + '/fcgetprofile',
       type: 'post',
@@ -83,39 +87,41 @@ $.ajax({
       success: function (node) {
 //       alert("Loaded " + node.title);
 	   
-	var theDiv = document.getElementById("memberCard");
-	theDiv.setAttribute('style', 'height: 400px; position: relative; ' + ($(window).width() < 400 ? 'left: -130px; transform: rotate(90deg);' : '')+' width: 400px'); //transform: rotate(90deg);
+	var theDiv = document.getElementById("memberCard" + Drupal.settings.language_default);
+//	theDiv.setAttribute('style', ' position: relative; ' + ($(window).width() < 400 ?  'transform: rotate(90deg);' : '') +'transform-origin: 50% 30%; width: 400px; height: 450px'); //transform: rotate(90deg);
+//	theDiv.setAttribute('style', 'height: 400px; position: relative;  width: 400px'); //transform: rotate(90deg);
+	theDiv.setAttribute('style', ' position: relative;	overflow:auto; height: 400px; width:400px');
 	var elm = document.createElement("img");
-	elm.src = 'images/membercard2.jpg';
+	elm.src = 'images/membercard.png';
 	theDiv.appendChild(elm);
 	el_span = document.createElement('span');
 	elm = document.createTextNode( node.memberid);
-	el_span.setAttribute('style', 'position: absolute;top: 150px; left: 210px;'); 
-	theDiv.appendChild(el_span);
-	el_span.appendChild(elm);
-//	theDiv.appendChild(document.createElement("br"));
-	el_span = document.createElement('span');
-	elm = document.createTextNode( node.firstname + ' ' + node.lastname);
-	el_span.setAttribute('style', 'position: absolute;top: 98px; left: 210px;'); 
+	el_span.setAttribute('style', 'position: absolute;top: 141px; left: 212px;'); 
 	theDiv.appendChild(el_span);
 	el_span.appendChild(elm);
 
-/* 	theDiv.appendChild(document.createElement("br"));
-	elm = document.createTextNode(t('Last Name') + ': ' + node.lastname);
-	theDiv.appendChild(elm); */
-/* 	theDiv.appendChild(document.createElement("br"));	
-	var d = node.expiration.split(' ')[0].split('-');
-	elm = document.createTextNode(t('Expy Date') + ': ' + d[2]+'/'+d[1]+'/'+d[0]);
-	theDiv.appendChild(elm);
- */	   
+	
+	el_span = document.createElement('span');
+	elm = document.createTextNode( node.firstname + ' ' + node.lastname);
+	el_span.setAttribute('style', 'position: absolute;top: 85px; left: 212px;'); 
+	theDiv.appendChild(el_span);
+	el_span.appendChild(elm);
+
+	el_span = document.createElement('span');
+	el_span.setAttribute('style', 'position: absolute;top: 195px; left: 212px;'); 	
+	var d = node.expiration.split(' ')[0].split('-');  
+	elm = document.createTextNode( d[2]+'/'+d[1]+'/'+d[0]);
+	theDiv.appendChild(el_span);
+	el_span.appendChild(elm);
       }
   });
   
-     return '<div id="memberCard"></div>'; 
+     return '<div id="memberCard' + Drupal.settings.language_default + '"></div>'; 
 }
 
 function my_module_about_page() {
-     return 'Fabcard Mobile 0.3.0<br><br>Copyright &#169; Fabcard 2016';	
+     return 'Fabcard Mobile application version 0.4.0<br><br>Fab Card was created with the purpose of providing the best in <i>Face and Body</i> services, by supporting the industry, by promoting the best providers, and passing on benefits to our members.'+
+ '<br><br>Produced by <a href="http://www.wctcoltd.com/">ClipCubeMedia.com</a><br><br>Copyright &#169;  Fabcard Asia Co’, Ltd. 2016';	
 }	
 	
 
@@ -133,7 +139,7 @@ function my_module_coupons_page() {
       row_callback: 'my_module_coupons_list_row',
       empty_callback: 'my_module_coupons_list_empty',
       attributes: {
-        id: 'my_coupons_list_view'
+        id: 'my_coupons_list_view' + Drupal.settings.language_default
       }
     };
     return content;
@@ -146,7 +152,7 @@ function my_module_coupons_page() {
  */
 function my_module_coupons_list_row(view, row) {
   try {
-    return l(row.title + '<br>' + '<img src="' + row.field_promotion_image.src + '"><br>' + row.body , Drupal.settings.site_path + '/node/' + row.nid, { InAppBrowser: true }); 
+    return l('<span style="margin-left: auto;    margin-right: auto;">'  + row.title + '<br>' + '<img src="' + row.field_promotion_image.src + '"><br>' + row.body +'</span>', Drupal.settings.site_path + '/node/' + row.nid, { InAppBrowser: true }); 
   }
   catch (error) { console.log('my_module_coupons_list_row - ' + error); }
 }
@@ -178,6 +184,9 @@ function my_module_form_alter(form, form_state, form_id) {
 * The callback for the "Hello World" page.
 */
 function my_module_hello_world_page() {
+	
+//	var theDiv = document.getElementById("contentDiv");
+//	theDiv.setAttribute('style', 'height: 500px');
   var content = {};
   if (Drupal.user.uid == 0) {
 	content['my_button'] = {
@@ -196,15 +205,25 @@ function my_module_hello_world_page() {
   else {
 	  
   content['memberCard'] = {
-  theme: 'button_link',
+  theme: 'button',
   text: t('Member Card'),
-  path: (Drupal.settings.language_default =='und') ? 'memberCarden' : 'memberCard' 
+  attributes: {
+    onclick: " drupalgap_goto((Drupal.settings.language_default =='und') ? 'memberCarden' : 'memberCard');" 
   }	  
-	  
+}; 	  
   content['my_button_link'] = {
   theme: 'button_link',
   text: t('Promotions'),
   path: (Drupal.settings.language_default =='und') ? 'couponsen' : 'coupons' 
+  }
+  
+  content['fabcard_site'] = {
+  theme: 'button_link',
+  text: t('Fab Card Asia Site'),
+  path: 'http://fabcardasia.co.th',
+  options: {
+    InAppBrowser:true
+  }
   }
 
   
@@ -213,7 +232,7 @@ function my_module_hello_world_page() {
   theme: 'button',
   text: (Drupal.settings.language_default!='und') ? 'English' : 'ภาษาไทย',
   attributes: {
-    onclick: "Drupal.settings.language_default = (Drupal.settings.language_default =='und') ? 'th' : 'und'; drupalgap_goto((Drupal.settings.language_default =='und') ? 'hello_worlden' : 'hello_world', {reloadPage:true});"
+    onclick: "Drupal.settings.language_default = (Drupal.settings.language_default =='und') ? 'th' : 'und'; drupalgap_goto((Drupal.settings.language_default =='und') ? 'hello_worlden' : 'hello_world');"  //, {reloadPage:true}
   }
 }; 
   return content;
