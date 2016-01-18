@@ -127,7 +127,15 @@ drupalgap.settings.menus['user_menu_anonymous'] = {
           'data-icon': 'lock'
         }
       }
-    },
+    },{
+      title: t('Exit'),
+      path: 'exit',
+      options: {
+        attributes: {
+          'data-icon': 'delete'
+        }
+      }
+    }
 
   ]
 };
