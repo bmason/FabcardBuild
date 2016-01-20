@@ -1,0 +1,9 @@
+.ui-page {  
+	background-image: url('images/BG-4.png');
+	background-position: 0 88px; 
+	background-size: 100% 100% ; 
+	background-repeat: no-repeat;
+	background-attachment: fixed;}
+
+.ui-btn {margin-top: 30px}
+
