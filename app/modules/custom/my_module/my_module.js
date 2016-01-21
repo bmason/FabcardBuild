@@ -125,7 +125,7 @@ $.ajax({
 }
 
 function my_module_about_page() {
-     return 'Fabcard Mobile application version 0.4.0<br><br>Fab Card was created with the purpose of providing the best in <i>Face and Body</i> services, by supporting the industry, by promoting the best providers, and passing on benefits to our members.'+
+     return 'Fabcard Mobile application version 0.5.0<br><br>Fab Card was created with the purpose of providing the best in <i>Face and Body</i> services, by supporting the industry, by promoting the best providers, and passing on benefits to our members.'+
  '<br><br>Produced by <a href="http://www.wctcoltd.com/">ClipCubeMedia.com</a><br><br>Copyright &#169;  Fabcard Asia Co., Ltd. 2016';	
 }	
 	
@@ -213,14 +213,16 @@ function my_module_hello_world_page() {
   theme: 'button',
   text: t('Member Card'),
   attributes: {
-    onclick: " drupalgap_goto((Drupal.settings.language_default =='und') ? 'memberCarden' : 'memberCard');" 
+    onclick: " drupalgap_goto((Drupal.settings.language_default =='und') ? 'memberCarden' : 'memberCard', {reloadPage:true});" 
   }	  
 }; 	  
   content['my_button_link'] = {
-  theme: 'button_link',
+  theme: 'button',
   text: t('Promotions'),
-  path: (Drupal.settings.language_default =='und') ? 'couponsen' : 'coupons' 
-  }
+  attributes: {
+    onclick: " drupalgap_goto((Drupal.settings.language_default =='und') ? 'couponsen' : 'coupons', {reloadPage:true});" 
+  }	  
+  };
   
   content['fabcard_site'] = {
   theme: 'button_link',
