@@ -127,7 +127,7 @@ $.ajax({
 function my_module_about_page() {
      return 'Fab Card Mobile application version 0.5.1<br><br>Fab Card was created with the purpose of providing the best in <i>Face and Body</i> services, by supporting the industry, by promoting the best providers, and passing on benefits to our members.'+
  '<br><br>Produced by <a href="http://www.wctcoltd.com/">ClipCubeMedia.com</a><br><br>Copyright &#169;  Fabcard Asia Co., Ltd. 2016'+
- 'How to Use your Application.<br>'+
+ '<br><br>How to Use your Application.<br>'+
  'The Fab Card mobile app is your virtual card. Show your virtual member card to any of our providers and you will receive your Fab Card discount and all associated benefits. '+
 'Click promotions and you will see all the special promotions available from different providers. To find out more details just click the image. '+
 'No need for another card to be added to your wallet, no need to type in a website address. Everything is available from the Fab Card mobile app.';	
@@ -255,7 +255,7 @@ function my_module_hello_world_page() {
   path: 'images/' +((Drupal.settings.language_default =='und') ? 'th' : 'en') + '.png',
   attributes: {
 	'id':'ui-btn-language',
-    onclick: "Drupal.settings.language_default = (Drupal.settings.language_default =='und') ? 'th' : 'und'; drupalgap_goto((Drupal.settings.language_default =='und') ? 'hello_worlden' : 'hello_world');"  //, {reloadPage:true}
+    onclick: "Drupal.settings.language_default = (Drupal.settings.language_default =='und') ? 'th' : 'und'; drupalgap_goto((Drupal.settings.language_default =='und') ? 'hello_worlden' : 'hello_world', {reloadPage:true});"  
   }
  
 }; 
