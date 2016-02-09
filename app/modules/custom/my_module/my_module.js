@@ -125,7 +125,7 @@ $.ajax({
 }
 
 function my_module_about_page() {
-     return 'Fab Card Mobile application version 0.5.1<br><br>Fab Card was created with the purpose of providing the best in <i>Face and Body</i> services, by supporting the industry, by promoting the best providers, and passing on benefits to our members.'+
+     return 'Fab Card Mobile application version 0.5.2<br><br>Fab Card was created with the purpose of providing the best in <i>Face and Body</i> services, by supporting the industry, by promoting the best providers, and passing on benefits to our members.'+
  '<br><br>Produced by <a href="http://www.wctcoltd.com/">ClipCubeMedia.com</a><br><br>Copyright &#169;  Fabcard Asia Co., Ltd. 2016'+
  '<br><br>How to Use your Application.<br>'+
  'The Fab Card mobile app is your virtual card. Show your virtual member card to any of our providers and you will receive your Fab Card discount and all associated benefits. '+
