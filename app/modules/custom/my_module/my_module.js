@@ -96,7 +96,8 @@ $.ajax({
 	var elm = document.createElement("img");
 	elm.src = 'images/membercard.png';
 	var innerDiv = document.createElement("div");
-	innerDiv.setAttribute('style', ' position: absolute; ' + ($(window).width() < 400 ?  'transform: rotate(90deg);' : '') +'left: 10px; top: 100px; transform-origin: 45% 20%; width: 400px; height: 450px');
+//	innerDiv.setAttribute('style', ' position: absolute; ' + ($(window).width() < 400 ?  'transform: rotate(90deg);' : '') +'left: 10px; top: 100px; transform-origin: 45% 20%; width: 400px; height: 450px');
+	innerDiv.setAttribute('style', '  ' + ($(window).width() < 400 ?  'position: relative; top: -250px; transform: rotate(90deg);' : '') +'transform-origin: left bottom; ');
 	theDiv.appendChild(innerDiv);
 	innerDiv.appendChild(elm);
 	el_span = document.createElement('span');
